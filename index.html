@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Hisham Rahmath">
+<meta property="og:description" content="Computer Science at DePaul. Software, data, and AI projects, experience, and leadership.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%232f5fd0'/%3E%3Cstop offset='1' stop-color='%23a3214e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23g)'/%3E%3Ctext x='16' y='21' font-family='Arial' font-weight='700' font-size='13' fill='white' text-anchor='middle'%3E10%3C/text%3E%3C/svg%3E">
+<title>Hisham Rahmath</title>
+<meta name="description" content="Hisham Rahmath — DePaul Computer Science student building software and data projects in Chicago.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: match-day site. Separate pages switched from a sticky header; home page is an interactive pitch where each player opens a page. */
+:root {
+  --bg: #fbfcfe;
+  --surface: #ffffff;
+  --ink: #13213f;
+  --muted: #5a6683;
+  --line: #e3e8f2;
+  --blue: #2f5fd0;
+  --garnet: #a3214e;
+  --sky: #5d9bd6;
+  --sky-soft: #eaf3fb;
+  --gold: #b8891c;
+  --gold-soft: #faf3df;
+  --grass: #e9f4ee;
+  --grass-line: #ffffff;
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1424; --surface: #141d31; --ink: #eef2fa; --muted: #9aa6c2; --line: #24304a;
+    --blue: #86a8ff; --garnet: #f17ea3; --sky: #8ec2ee; --sky-soft: #16263d;
+    --gold: #e4bd5a; --gold-soft: #2a2414; --grass: #12291f; --grass-line: #2c4a3c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1424; --surface: #141d31; --ink: #eef2fa; --muted: #9aa6c2; --line: #24304a;
+  --blue: #86a8ff; --garnet: #f17ea3; --sky: #8ec2ee; --sky-soft: #16263d;
+  --gold: #e4bd5a; --gold-soft: #2a2414; --grass: #12291f; --grass-line: #2c4a3c; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+p { margin: 0; }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+/* Header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 14px; padding-block: 10px; }
+.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 400 22px/1 var(--display); background: none; border: 0; cursor: pointer; padding: 0; white-space: nowrap; }
+.ten { font: 600 11px/1 var(--mono); color: #fff; background: linear-gradient(135deg, var(--blue), var(--garnet)); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.tabs { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { border: 0; background: none; padding: 8px 12px; border-radius: 999px; font: 600 13px/1 var(--body); color: var(--muted); cursor: pointer; white-space: nowrap; transition: background .2s, color .2s; }
+.tab:hover { color: var(--ink); background: var(--sky-soft); }
+.tab[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.mode { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; }
+.mode svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.8; }
+@media (max-width: 760px) { .mark .full { display: none; } }
+
+/* Pages */
+.page { padding-block: 48px 72px; }
+.page + .page { border-top: 1px solid var(--line); }
+.page { scroll-margin-top: 60px; }
+a, button, .player, .pcard, .skill, .gear, .stop, .shot { cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  .page.enter { animation: enter .45s ease-out both; }
+  @keyframes enter { from { opacity: .001; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+}
+.kicker { display: inline-flex; align-items: center; gap: 10px; font: 500 12px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--garnet); }
+.kicker::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+h1 { font: 400 clamp(54px, 9.5vw, 96px)/0.95 var(--display); letter-spacing: -0.02em; margin: 0; }
+h1 em, h2 em { color: var(--blue); }
+h2 { font: 400 clamp(38px, 6vw, 56px)/1.02 var(--display); letter-spacing: -0.01em; margin: 10px 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); max-width: 40em; margin-bottom: 30px; }
+h3 { font: 700 18px/1.3 var(--body); margin: 0; }
+
+/* Home */
+.home { display: grid; gap: 26px; }
+.hero-head { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+.avatar { width: 110px; height: 110px; object-fit: cover; padding: 3px; border-radius: 50%; flex: none; display: grid; place-items: center; font: 400 38px/1 var(--display); color: var(--blue); border: 3px solid transparent; background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(135deg, var(--sky), var(--blue) 45%, var(--garnet)); background-origin: border-box; background-clip: padding-box, border-box; }
+.lede { font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55; max-width: 36em; text-wrap: pretty; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chips li { font: 500 13px/1 var(--body); padding: 9px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); }
+.chips li.win { background: var(--gold-soft); color: var(--ink); border-color: color-mix(in srgb, var(--gold) 40%, var(--line)); }
+.now { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; font-size: 15px; }
+.pulse { width: 10px; height: 10px; border-radius: 50%; background: #2fb36d; box-shadow: 0 0 0 0 rgba(47,179,109,.5); }
+@media (prefers-reduced-motion: no-preference) { .pulse { animation: pulse 2s infinite; } @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(47,179,109,0); } 100% { box-shadow: 0 0 0 0 rgba(47,179,109,0); } } }
+.now b { font-weight: 700; }
+
+.pitch-card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 12px; }
+.pitch-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.pitch-head p { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pitch-head span { font-size: 14px; color: var(--muted); }
+.pitch { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden; background: repeating-linear-gradient(90deg, var(--grass) 0 10%, color-mix(in srgb, var(--grass) 70%, var(--surface)) 10% 20%); }
+.pitch svg.lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pitch svg.lines * { fill: none; stroke: var(--grass-line); stroke-width: 3; }
+.player { position: absolute; transform: translate(-50%, -50%); border: 0; background: none; cursor: pointer; display: grid; justify-items: center; gap: 6px; padding: 4px; }
+.shirt { width: clamp(38px, 6vw, 56px); height: clamp(38px, 6vw, 56px); border-radius: 50%; display: grid; place-items: center; font: 700 clamp(13px, 1.8vw, 18px)/1 var(--body); color: #fff; background: linear-gradient(135deg, var(--blue) 50%, var(--garnet) 50%); box-shadow: 0 8px 18px -8px rgba(19,33,63,.6); transition: transform .25s ease; }
+.player.cap .shirt { background: linear-gradient(135deg, var(--sky) 50%, #fff 50%); color: var(--ink); }
+.player .name { font: 700 clamp(11px, 1.4vw, 13px)/1 var(--body); background: var(--surface); color: var(--ink); padding: 5px 8px; border-radius: 999px; box-shadow: 0 2px 8px -4px rgba(0,0,0,.3); white-space: nowrap; }
+.shirt svg { width: 50%; height: 50%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.player:hover .shirt, .player:focus-visible .shirt { transform: scale(1.12) translateY(-3px); }
+.ballmark { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); transform: translate(-50%, -50%); transition: left .6s cubic-bezier(.3,.7,.2,1), top .6s cubic-bezier(.3,.7,.2,1); pointer-events: none; }
+.tip { min-height: 1.6em; font-size: 15px; color: var(--muted); }
+.tip b { color: var(--ink); }
+
+/* Buttons */
+.cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; font: 600 14px/1 var(--body); text-decoration: none; border: 1px solid var(--line); background: var(--surface); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--blue) 50%, transparent); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* Projects */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.filter { border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 999px; font: 600 13px/1 var(--body); cursor: pointer; color: var(--muted); }
+.filter[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+@media (max-width: 860px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .grid3 { grid-template-columns: 1fr; } }
+.pcard { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 22px; display: grid; gap: 12px; align-content: start; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease; }
+.pcard:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -28px color-mix(in srgb, var(--blue) 60%, transparent); }
+.pcard[hidden] { display: none !important; }
+.pcard .ttl { font: 400 34px/1 var(--display); }
+.pcard p { font-size: 15px; color: var(--muted); }
+.badge { justify-self: start; font: 600 12px/1 var(--body); padding: 7px 11px; border-radius: 999px; background: var(--sky-soft); color: var(--blue); }
+.badge.gold { background: var(--gold-soft); color: var(--gold); }
+.badge.garnet { background: color-mix(in srgb, var(--garnet) 12%, var(--surface)); color: var(--garnet); }
+.more { font: 700 13px/1 var(--body); color: var(--blue); }
+
+.detail { margin-top: 22px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); background: linear-gradient(160deg, var(--sky-soft), var(--surface) 60%); border-radius: 20px; padding: 26px; display: grid; gap: 14px; }
+.detail[hidden] { display: none !important; }
+.detail-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.detail h3 { font: 400 40px/1 var(--display); }
+.close { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 12px; cursor: pointer; font: 600 13px/1 var(--body); }
+.detail ul.points { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.detail ul.points li::marker { color: var(--garnet); }
+.story-box { background: var(--surface); border-radius: 12px; padding: 14px 16px; font-size: 15px; color: var(--muted); border: 1px solid var(--line); }
+.story-box b { color: var(--ink); }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.stack li { font: 400 12px/1 var(--mono); color: var(--muted); background: var(--bg); border: 1px solid var(--line); padding: 6px 8px; border-radius: 6px; }
+.links { display: flex; gap: 18px; flex-wrap: wrap; font: 700 14px/1 var(--body); }
+.links a { color: var(--blue); text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+
+/* Story */
+.route { display: flex; gap: 0; overflow-x: auto; padding: 6px 2px 14px; scrollbar-width: thin; }
+.stop { flex: 1 0 120px; border: 0; background: none; cursor: pointer; display: grid; justify-items: center; gap: 8px; position: relative; padding: 0 4px; }
+.stop::before { content: ""; position: absolute; top: 15px; left: 0; right: 0; border-top: 2px dashed var(--sky); z-index: 0; }
+.stop:first-child::before { left: 50%; }
+.stop:last-child::before { right: 50%; }
+.stop .dot { position: relative; z-index: 1; width: 32px; height: 32px; border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); display: grid; place-items: center; transition: transform .25s, background .25s; }
+.stop .dot i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); opacity: 0; transition: opacity .25s; }
+.stop .yr { font: 600 12px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--garnet); }
+.stop .lbl { font: 600 13px/1.3 var(--body); color: var(--muted); text-align: center; }
+.stop[aria-selected="true"] .dot { transform: scale(1.15); background: var(--sky-soft); }
+.stop[aria-selected="true"] .dot i { opacity: 1; }
+.stop[aria-selected="true"] .lbl { color: var(--ink); }
+.chapter { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 760px) { .chapter { grid-template-columns: 1fr; } }
+.chapter-text { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: grid; gap: 14px; min-height: 230px; }
+.chapter-text h3 { font: 400 34px/1.05 var(--display); }
+.chapter-text p { font-size: 16.5px; }
+.chapter-nav { display: flex; gap: 8px; margin-top: 4px; }
+.side-cards { display: grid; gap: 12px; }
+.mini { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; }
+.mini dt { font: 500 11px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.mini dd { margin: 0; font-size: 15px; }
+.mini.teams { background: linear-gradient(90deg, color-mix(in srgb, var(--blue) 12%, var(--surface)), color-mix(in srgb, var(--garnet) 12%, var(--surface)) 55%, var(--sky-soft)); }
+
+/* Experience */
+.jobs { display: grid; gap: 12px; }
+.job { border: 1px solid var(--line); background: var(--surface); border-radius: 16px; overflow: hidden; }
+.job-btn { width: 100%; border: 0; background: none; cursor: pointer; text-align: left; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 18px 20px; }
+.job-btn .org { color: var(--muted); font-size: 14.5px; }
+.job-btn .when { font: 500 12.5px/1.5 var(--mono); color: var(--muted); white-space: nowrap; }
+.job.current .when { color: var(--blue); }
+.chev { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: transform .25s; }
+.chev svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 2; }
+.job-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.job-body { padding: 0 20px 18px; }
+.job-body ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 15px; }
+.job-body ul li::marker { color: var(--sky); }
+.job-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 560px) { .job-btn { grid-template-columns: minmax(0, 1fr) auto; } .job-btn .when { display: block; } }
+
+/* Skills */
+.hood { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 760px) { .hood { grid-template-columns: 1fr; } }
+.dash { background: var(--ink); color: var(--bg); border-radius: 22px; padding: 22px; display: grid; gap: 14px; justify-items: center; }
+.dash svg { width: 100%; max-width: 200px; height: auto; }
+.dash .gtitle { font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+.dash .gnum { font: 400 44px/1 var(--display); }
+.needle { transform-origin: 100px 100px; transition: transform .8s cubic-bezier(.3,1.4,.4,1); }
+.gears { display: grid; gap: 6px; width: 100%; }
+.gear { border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); background: transparent; color: var(--bg); border-radius: 10px; padding: 10px 12px; cursor: pointer; text-align: left; font: 600 14px/1 var(--body); display: flex; justify-content: space-between; }
+.gear[aria-pressed="true"] { background: var(--bg); color: var(--ink); }
+.gear small { font: 500 12px/1 var(--mono); opacity: .7; }
+.skill-panel { display: grid; gap: 16px; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 10px 14px; cursor: pointer; font: 600 14px/1 var(--body); transition: transform .15s, border-color .15s; }
+.skill:hover { transform: translateY(-2px); border-color: var(--sky); }
+.skill[aria-pressed="true"] { border-color: var(--blue); background: var(--sky-soft); color: var(--blue); }
+.used { background: var(--surface); border: 1px dashed var(--line); border-radius: 14px; padding: 16px; font-size: 15px; color: var(--muted); min-height: 84px; }
+.used b { color: var(--ink); }
+.coursework { font-size: 15px; color: var(--muted); }
+.coursework b { color: var(--ink); }
+
+/* Leadership */
+.leaders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 700px) { .leaders { grid-template-columns: 1fr; } }
+.lead { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 10px; transition: transform .25s, box-shadow .25s; }
+.lead:hover { transform: translateY(-3px); box-shadow: 0 20px 36px -28px color-mix(in srgb, var(--garnet) 60%, transparent); }
+.lead.span2 { grid-column: 1 / -1; }
+.lead-top { display: flex; align-items: center; gap: 12px; }
+.armband { flex: none; width: 36px; height: 24px; border-radius: 5px; background: linear-gradient(90deg, var(--blue), var(--garnet)); color: #fff; font: 800 13px/24px var(--body); text-align: center; }
+.lead .when { font: 500 12px/1.4 var(--mono); color: var(--muted); }
+.lead p { font-size: 15px; color: var(--muted); }
+.stat { display: flex; gap: 18px; flex-wrap: wrap; }
+.stat div { display: grid; }
+.stat b { font: 400 30px/1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat span { font: 500 11px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.cabinet { margin-top: 30px; background: var(--gold-soft); border-radius: 22px; padding: 24px; }
+.cabinet h3 { font: 400 30px/1 var(--display); margin-bottom: 16px; }
+.trophies { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) { .trophies { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.trophy { background: var(--surface); border-radius: 14px; padding: 16px; display: grid; gap: 8px; border: 1px solid color-mix(in srgb, var(--gold) 25%, var(--line)); position: relative; overflow: hidden; }
+.trophy svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 1.7; }
+.trophy .yr { font: 600 12px/1 var(--mono); color: var(--gold); }
+.trophy p { font-size: 14px; font-weight: 600; }
+.trophy::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) { .trophy:hover::after { opacity: 1; animation: shine .8s ease; } @keyframes shine { to { left: 130%; } } }
+
+/* Photos */
+.cover { width: calc(100% + 44px); margin: -22px -22px 4px; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 18px 18px 0 0; display: block; max-width: none; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .gallery { grid-template-columns: 1fr; } }
+.shot { position: relative; border: 0; padding: 0; background: none; border-radius: 14px; overflow: hidden; display: block; width: 100%; }
+.shot img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4 / 3; transition: transform .5s ease; }
+.shot:hover img { transform: scale(1.04); }
+.shot span { position: absolute; left: 10px; bottom: 10px; font: 600 12px/1 var(--body); background: rgba(13,20,36,.72); color: #fff; padding: 7px 10px; border-radius: 999px; }
+.team { font-size: 14px; color: var(--muted); }
+.quote { margin: 0 0 28px; padding: 18px 22px; border-left: 3px solid var(--garnet); background: var(--surface); border-radius: 0 14px 14px 0; font: italic 400 clamp(22px, 3vw, 28px)/1.3 var(--display); max-width: 34em; }
+.quote cite { display: block; margin-top: 8px; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-style: normal; }
+.lead.umma { grid-column: 1 / -1; transition: box-shadow .3s ease, border-color .3s ease; }
+.lead.umma h3 { transition: font-size .3s ease; }
+.lead.umma:hover, .lead.umma.open, .lead.umma:focus-within { border-color: color-mix(in srgb, var(--garnet) 40%, var(--line)); }
+.lead.umma:hover h3, .lead.umma.open h3 { font-size: 26px; }
+.hint { margin-left: auto; font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.lead.umma:hover .hint, .lead.umma.open .hint { opacity: 0; }
+@media (hover: none) { .hint::after { content: ""; } }
+.umma-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s ease; }
+.lead.umma:hover .umma-more, .lead.umma.open .umma-more { grid-template-rows: 1fr; }
+.umma-inner { overflow: hidden; display: grid; gap: 10px; min-height: 0; }
+.umma-inner > :first-child { margin-top: 10px; }
+.umma-about { color: var(--ink) !important; font-size: 15.5px; }
+.umma-inner h4 { font: 400 26px/1 var(--display); margin: 8px 0 0; }
+.umma-sub { font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .umma-more, .lead.umma h3 { transition: none; } }
+.stage { margin-top: 30px; }
+.stage h3 { font: 400 30px/1 var(--display); margin-bottom: 6px; }
+.stage-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.stage-grid .shot img { aspect-ratio: auto; height: 300px; }
+.stage-grid .tall img { object-position: center 25%; }
+@media (max-width: 700px) { .stage-grid { grid-template-columns: 1fr; } .stage-grid .shot img { height: 240px; } }
+.award-note { margin-top: 14px; font-size: 15px; color: var(--muted); max-width: 46em; }
+.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(8,12,22,.88); display: grid; place-items: center; align-content: center; gap: 12px; padding: max(20px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(20px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lightbox img { max-width: min(92vw, 1100px); max-height: 78vh; border-radius: 12px; object-fit: contain; }
+.lightbox p { color: #fff; font-size: 15px; margin: 0; text-align: center; }
+.lb-close { position: absolute; top: calc(16px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1); color: #fff; border-radius: 999px; padding: 8px 14px; font: 600 13px/1 var(--body); }
+
+.chart-cover { background: linear-gradient(160deg, var(--sky-soft), var(--surface)); padding: 14px 16px 6px; aspect-ratio: auto; display: grid; gap: 4px; }
+.cc-head, .mf-score { display: flex; align-items: center; gap: 10px; font: 700 13px/1 var(--body); }
+.cc-head b, .mf-score b { font: 400 26px/1 var(--display); color: var(--ink); }
+.cc-fra { color: var(--blue); } .cc-eng { color: var(--garnet); }
+svg.momentum { width: 100%; height: auto; display: block; }
+.match-fig { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px 10px; }
+.mf-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mf-head small { font: 500 11px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.match-fig figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 4px; }
+.match-fig figcaption a { color: var(--blue); }
+
+.to-pitch { position: fixed; z-index: 20; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; border: 0; cursor: pointer; font: 700 13px/1 var(--body); color: #fff; background: linear-gradient(135deg, var(--blue), var(--garnet)); box-shadow: 0 12px 28px -12px rgba(19,33,63,.6); transition: transform .2s ease; }
+.to-pitch:hover { transform: translateY(-3px); }
+.to-pitch svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 560px) { .to-pitch span { display: none; } .to-pitch { padding: 14px; } }
+
+/* Contact */
+.contact { display: grid; gap: 22px; max-width: 640px; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.email { font: 400 clamp(28px, 5vw, 44px)/1.1 var(--display); user-select: all; word-break: break-all; }
+.copy { font: 600 13px/1 var(--body); padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
+footer { padding-block: 24px 40px; font: 400 12px/1.5 var(--mono); color: var(--muted); border-top: 1px solid var(--line); }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <button class="mark" type="button" data-go="home"><span class="ten">10</span><span class="full">Hisham Rahmath</span></button>
+    <nav class="tabs" aria-label="Pages">
+      <button class="tab" type="button" data-go="home">Home</button>
+      <button class="tab" type="button" data-go="story">Story</button>
+      <button class="tab" type="button" data-go="projects">Projects</button>
+      <button class="tab" type="button" data-go="experience">Experience</button>
+      <button class="tab" type="button" data-go="skills">Skills</button>
+      <button class="tab" type="button" data-go="leadership">Leadership</button>
+      <button class="tab" type="button" data-go="contact">Contact</button>
+    </nav>
+    <button class="mode" id="mode" type="button" aria-label="Switch light or dark mode">
+      <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <div class="page" id="home" data-page>
+    <div class="wrap home">
+      <span class="kicker">Kickoff · Software, data &amp; AI</span>
+      <div class="hero-head">
+        <img class="avatar" src="img/headshot.jpg" alt="Hisham Rahmath" width="110" height="110">
+        <h1>Hisham <em>Rahmath</em></h1>
+      </div>
+      <p class="lede">Junior at DePaul University studying Computer Science, focused on Software Development and AI, with a minor in Data Science. I work across Data Science, Automation, and AI/ML, and I support the Classroom Technology systems DePaul relies on every day, which keeps my problem-solving grounded in real infrastructure.</p>
+      <ul class="chips">
+        <li>Educated in Saudi Arabia, India &amp; the US</li>
+        <li>CS · Software Development &amp; AI</li>
+        <li>Minor in Data Science</li>
+        <li>GPA 3.7 · Dean's List every quarter</li>
+        <li class="win">🏆 1st of 31 · DemonHacks 2026</li>
+      </ul>
+      <div class="now"><span class="pulse" aria-hidden="true"></span><p><b>Right now:</b> IT &amp; Cybersecurity Intern at the Village of Northbrook, building MatchIQ, and looking for internships in Data Science, Software Engineering, IT, and Cloud.</p></div>
+
+      <div class="pitch-card">
+        <div class="pitch-head"><p>Pick a player to explore</p><span>Each one takes you to a section</span></div>
+        <div class="pitch" id="pitch">
+          <svg class="lines" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="40" y="40" width="1520" height="820"/>
+            <line x1="800" y1="40" x2="800" y2="860"/>
+            <circle cx="800" cy="450" r="120"/>
+            <rect x="40" y="230" width="230" height="440"/>
+            <rect x="40" y="340" width="90" height="220"/>
+            <rect x="1330" y="230" width="230" height="440"/>
+            <rect x="1470" y="340" width="90" height="220"/>
+            <path d="M270 360 A110 110 0 0 1 270 540"/>
+            <path d="M1330 360 A110 110 0 0 0 1330 540"/>
+          </svg>
+          <span class="ballmark" id="ball" style="left:50%;top:50%"></span>
+          <button class="player" type="button" data-go="contact"    data-tip="<b>Contact.</b> Email, LinkedIn, GitHub." style="left:91%;top:50%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span><span class="name">Contact</span></button>
+          <button class="player" type="button" data-go="experience" data-tip="<b>Experience.</b> Northbrook IT, DePaul classroom tech, and more." style="left:28%;top:74%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18"/></svg></span><span class="name">Experience</span></button>
+          <button class="player" type="button" data-go="skills"     data-tip="<b>Skills.</b> Look under the hood: languages, data, software, IT." style="left:72%;top:26%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="name">Skills</span></button>
+          <button class="player cap" type="button" data-go="leadership" data-tip="<b>Leadership.</b> UMMA, Muslim Tech Collaborative, Fresh Eyes, awards." style="left:72%;top:74%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v4M9 20h6M8 6H5a2 2 0 0 0 3 3M16 6h3a2 2 0 0 1-3 3"/></svg></span><span class="name">Leadership</span></button>
+          <button class="player" type="button" data-go="story"      data-tip="<b>My story.</b> From Riyadh to Chicago, with a global education along the way." style="left:9%;top:50%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><span class="name">Story</span></button>
+          <button class="player" type="button" data-go="projects"   data-tip="<b>Projects.</b> MatchIQ, WindWalk, Renaro." style="left:28%;top:26%"><span class="shirt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span><span class="name">Projects</span></button>
+        </div>
+        <p class="tip" id="tip">Hover or tap a player to jump to that section.</p>
+      </div>
+
+      <div class="cta">
+        <button class="btn primary" type="button" data-go="projects">See my projects</button>
+        <a class="btn" href="https://github.com/Hishammrahmath" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/hisham-mohammed-rahmath-b92a78299/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="Hisham-Rahmath-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="page" id="story" data-page>
+    <div class="wrap">
+      <span class="kicker">The journey</span>
+      <h2>From the pitch in Riyadh to <em>code in Chicago</em></h2>
+      <p class="sub">Tap a stop on the route.</p>
+      <div class="route" role="tablist" aria-label="Life timeline">
+        <button class="stop" type="button" role="tab" data-ch="0"><span class="dot"><i></i></span><span class="yr">Riyadh</span><span class="lbl">Growing up</span></button>
+        <button class="stop" type="button" role="tab" data-ch="1"><span class="dot"><i></i></span><span class="yr">Worldwide</span><span class="lbl">A global education</span></button>
+        <button class="stop" type="button" role="tab" data-ch="2"><span class="dot"><i></i></span><span class="yr">2023</span><span class="lbl">DePaul</span></button>
+        <button class="stop" type="button" role="tab" data-ch="3"><span class="dot"><i></i></span><span class="yr">2024</span><span class="lbl">Trying everything</span></button>
+        <button class="stop" type="button" role="tab" data-ch="4"><span class="dot"><i></i></span><span class="yr">2025</span><span class="lbl">Finding my fit</span></button>
+        <button class="stop" type="button" role="tab" data-ch="5"><span class="dot"><i></i></span><span class="yr">2026</span><span class="lbl">Now</span></button>
+      </div>
+      <div class="chapter">
+        <div class="chapter-text" id="chapter" role="tabpanel" aria-live="polite"></div>
+        <dl class="side-cards">
+          <div class="mini teams"><dt>My teams</dt><dd>FC Barcelona and Argentina. Messi is the GOAT.</dd></div>
+          <div class="mini"><dt>Off the clock</dt><dd>Soccer, running (I race 5Ks and 10Ks often), basketball, working on cars, video and design</dd></div>
+          <div class="mini"><dt>Languages</dt><dd>English, Urdu, Hindi, Arabic</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="page" id="projects" data-page>
+    <div class="wrap">
+      <span class="kicker">Highlights</span>
+      <h2>Things I've <em>built</em></h2>
+      <p class="sub">Filter by type, then open a project for the full story.</p>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="data" aria-pressed="false">Data</button>
+        <button class="filter" type="button" data-filter="software" aria-pressed="false">Software</button>
+        <button class="filter" type="button" data-filter="hackathon" aria-pressed="false">Hackathon</button>
+      </div>
+      <div class="grid3">
+        <button class="pcard" type="button" data-open="matchiq" data-tags="data software">
+          <div class="cover chart-cover"><div class="cc-head"><span class="cc-fra">FRA</span><b>4–6</b><span class="cc-eng">ENG</span></div><svg class="momentum" viewBox="0 0 800 260" aria-label="Momentum chart, France 4–6 England"></svg></div>
+          <span class="badge">Live · 2026</span>
+          <span class="ttl">MatchIQ</span>
+          <p>Explains when a World Cup match swung, minute by minute, across all 104 matches.</p>
+          <span class="more">Open project →</span>
+        </button>
+        <button class="pcard" type="button" data-open="windwalk" data-tags="software hackathon">
+          <img class="cover" src="img/windwalk-team.jpg" alt="The WindWalk team pointing at the app on two laptops" loading="lazy">
+          <span class="badge gold">🏆 1st of 31 teams</span>
+          <span class="ttl">WindWalk</span>
+          <p>Weather-aware walking routes through Chicago's Loop and the Pedway. Built in 24 hours.</p>
+          <span class="more">Open project →</span>
+        </button>
+        <button class="pcard" type="button" data-open="renaro" data-tags="software">
+          <img class="cover" src="img/renaro.jpg" alt="Renaro's live arrivals board for limo dispatchers" loading="lazy">
+          <span class="badge garnet">Backend Contributor</span>
+          <span class="ttl">Renaro</span>
+          <p>Multi-tenant dispatch platform for taxi and limo fleets.</p>
+          <span class="more">Open project →</span>
+        </button>
+      </div>
+
+      <article class="detail" id="d-matchiq" hidden>
+        <div class="detail-top"><h3>MatchIQ</h3><button class="close" type="button" data-close>Close</button></div>
+        <figure class="match-fig">
+          <div class="mf-head"><div class="mf-score"><span class="cc-fra">France</span><b>4–6</b><span class="cc-eng">England</span></div><small>World Cup 2026 · Third-place match · 10 goals, 9 turning points</small></div>
+          <svg class="momentum" viewBox="0 0 800 220" aria-label="Momentum by minute for France and England, with nine detected turning points"></svg>
+          <figcaption>Momentum by minute from MatchIQ. Circles mark detected turning points. <a href="https://matchiq-nine.vercel.app/?match=103" target="_blank" rel="noopener">Open this match live ↗</a></figcaption>
+        </figure>
+        <p>Football websites show possession and shots. MatchIQ shows <em>when</em> a match swung. It scores every minute of all 104 FIFA World Cup 2026 matches and flags the turning points.</p>
+        <ul class="points">
+          <li>Event-weighted momentum model in pandas over rolling 5-minute windows, built on 4 relational CSV datasets.</li>
+          <li>Turning-point detector that flags momentum swings, links the events nearby, and removes overlapping detections. Covered with pytest.</li>
+          <li>Fact-only explanations for fans, players, and coaches: momentum shifts <em>near</em> an event, never <em>because of</em> one.</li>
+          <li>Static data export so the dashboard loads instantly on Vercel, with no server to wake up.</li>
+        </ul>
+        <ul class="stack"><li>Python</li><li>pandas</li><li>FastAPI</li><li>Next.js</li><li>TypeScript</li><li>Plotly</li><li>pytest</li><li>Vercel</li></ul>
+        <div class="links"><a href="https://matchiq-nine.vercel.app" target="_blank" rel="noopener">Live demo ↗</a><a href="https://github.com/Hishammrahmath/world-cup-intelligence-platform" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="detail" id="d-windwalk" hidden>
+        <div class="detail-top"><h3>WindWalk</h3><button class="close" type="button" data-close>Close</button></div>
+        <div class="gallery">
+          <button class="shot" type="button" data-full="img/windwalk-first-place.jpg"><img src="img/windwalk-first-place.jpg" alt="The team in front of the 1st Place WindWalk slide" loading="lazy"><span>1st place at DemonHacks 2026</span></button>
+          <button class="shot" type="button" data-full="img/windwalk-team.jpg"><img src="img/windwalk-team.jpg" alt="The WindWalk team with the app on screen" loading="lazy"><span>Demo time</span></button>
+        </div>
+        <p>DemonHacks 2026 was a 24-hour hackathon hosted by the DePaul Computer Science Society and Upsilon Pi Epsilon, sponsored by Microsoft. The theme was <b>Loop Life</b>: find a problem in Chicago's Loop and build a fix.</p>
+        <p>The Loop's skyscrapers turn winter wind into tunnels, and more than 1.5 million pedestrians pass through each week. Most don't know about the Pedway, a 5-mile underground network connecting more than 40 blocks. WindWalk combines live weather data with the Pedway to find the most comfortable route. Our goal was simply to leave with a complete project. We left with 1st place out of 31 teams, at my first hackathon.</p>
+        <ul class="points">
+          <li>Worked across the stack: FastAPI backend, Dijkstra-based routing, OpenWeatherMap integration, and the React Native + Mapbox app.</li>
+          <li>Route costs change with live weather, so the best path in a snowstorm differs from the best path in July.</li>
+        </ul>
+        <p class="story-box"><b>Hardest part:</b> the Pedway has no live map or navigation, only static maps. We cached Pedway routes and built rerouting so people wouldn't get lost underground.</p>
+        <p class="team">Built with Buck Stevenson, Sameer Akhtar, Jenna Abuzerr, Aiana Kurumshieva, and Nurdan Zholonova.</p>
+        <ul class="stack"><li>Python</li><li>FastAPI</li><li>React Native</li><li>Mapbox</li><li>OpenWeatherMap</li><li>Dijkstra</li></ul>
+        <div class="links"><a href="https://devpost.com/software/windwalk" target="_blank" rel="noopener">Devpost ↗</a><a href="https://github.com/Hishammrahmath/WindWalk" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="detail" id="d-renaro" hidden>
+        <div class="detail-top"><h3>Renaro</h3><button class="close" type="button" data-close>Close</button></div>
+        <button class="shot" type="button" data-full="img/renaro.jpg"><img src="img/renaro.jpg" alt="Renaro's live arrivals board for limo dispatchers" loading="lazy" style="aspect-ratio:auto"><span>Dispatcher's live arrivals view</span></button>
+        <p>A multi-tenant dispatch platform for limo, livery, and black car operators, built by a friend alongside a working Chicago-area limo company. It brings reservations, flight tracking, dispatch, and billing into one place.</p>
+        <p>I contributed to the backend: dispatch, driver workflows, real-time messaging, payments, and analytics.</p>
+        <ul class="stack"><li>TypeScript</li><li>Fastify</li><li>PostgreSQL</li><li>Drizzle</li><li>Redis</li><li>WebSockets</li><li>Stripe Connect</li></ul>
+        <div class="links"><a href="https://renaroapp.com/" target="_blank" rel="noopener">renaroapp.com ↗</a></div>
+      </article>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="page" id="experience" data-page>
+    <div class="wrap">
+      <span class="kicker">Career</span>
+      <h2>Where I've <em>worked</em></h2>
+      <p class="sub">Click a role to see what I did there.</p>
+      <div class="jobs">
+        <div class="job current">
+          <button class="job-btn" type="button" aria-expanded="true">
+            <span><h3>IT &amp; Cybersecurity Intern</h3><span class="org">Village of Northbrook</span></span>
+            <span class="job-meta"><span class="when">Aug 2026 – Present</span><span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>
+          </button>
+          <div class="job-body"><ul>
+            <li>Functional and security testing of Microsoft Copilot Notebooks across OneDrive and SharePoint.</li>
+            <li>Security log and phishing review with CrowdStrike Falcon, Mimecast, and Rapid7.</li>
+            <li>Network troubleshooting with Cisco Meraki; resetting and reconfiguring access points and Catalyst switches over serial console.</li>
+            <li>Device deployment and patching through Microsoft Intune and Endpoint Central.</li>
+          </ul></div>
+        </div>
+        <div class="job current">
+          <button class="job-btn" type="button" aria-expanded="false">
+            <span><h3>Network &amp; Technology Assistant</h3><span class="org">DePaul University, Information Services</span></span>
+            <span class="job-meta"><span class="when">Jan 2025 – Present</span><span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>
+          </button>
+          <div class="job-body" hidden><ul>
+            <li>Support faculty with Windows and macOS machines, A/V systems, and Zoom Rooms across 100+ classrooms.</li>
+            <li>Imaged roughly 40–45 PCs in a single day with one coworker during a winter-break refresh.</li>
+            <li>Ran BIOS and driver updates across lab machines and tracked progress in a shared spreadsheet.</li>
+          </ul></div>
+        </div>
+        <div class="job current">
+          <button class="job-btn" type="button" aria-expanded="false">
+            <span><h3>Student Assistant &amp; Social Media Manager</h3><span class="org">DePaul Department of Anthropology</span></span>
+            <span class="job-meta"><span class="when">Jan 2024 – Present</span><span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>
+          </button>
+          <div class="job-body" hidden><ul><li>Co-manage the department's social media as part of a three-person team.</li></ul></div>
+        </div>
+        <div class="job">
+          <button class="job-btn" type="button" aria-expanded="false">
+            <span><h3>Orientation Leader</h3><span class="org">DePaul New Student and Family Engagement</span></span>
+            <span class="job-meta"><span class="when">2024 – 2025</span><span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>
+          </button>
+          <div class="job-body" hidden><ul><li>Guided 200–250 incoming students per session; joined the returning-leader panel in 2025.</li><li>The job that showed me I'm a people person.</li></ul></div>
+        </div>
+        <div class="job">
+          <button class="job-btn" type="button" aria-expanded="false">
+            <span><h3>Ticket Office &amp; Gameday Assistant</h3><span class="org">DePaul Athletics, Wintrust Arena</span></span>
+            <span class="job-meta"><span class="when">2023 – 2025</span><span class="chev"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>
+          </button>
+          <div class="job-body" hidden><ul><li>My first job at DePaul, supporting ticketing and game-day operations for DePaul NCAA events.</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="page" id="skills" data-page>
+    <div class="wrap">
+      <span class="kicker">Under the hood</span>
+      <h2>What I work <em>with</em></h2>
+      <p class="sub">Shift gears to switch categories, then click a skill to see where I've used it.</p>
+      <div class="hood">
+        <div class="dash">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="12" stroke-linecap="round"/>
+            <path id="arc" d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="url(#g)" stroke-width="12" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="transition: stroke-dashoffset .8s ease"/>
+            <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#5d9bd6"/><stop offset=".6" stop-color="#2f5fd0"/><stop offset="1" stop-color="#a3214e"/></linearGradient></defs>
+            <g class="needle" id="needle" style="transform: rotate(-90deg)"><line x1="100" y1="100" x2="100" y2="34" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></g>
+            <circle cx="100" cy="100" r="7" fill="currentColor"/>
+          </svg>
+          <span class="gtitle" id="gtitle">Languages</span>
+                    <div class="gears" role="group" aria-label="Skill categories">
+            <button class="gear" type="button" data-cat="lang" aria-pressed="true">Languages <small>1st</small></button>
+            <button class="gear" type="button" data-cat="data" aria-pressed="false">Data <small>2nd</small></button>
+            <button class="gear" type="button" data-cat="soft" aria-pressed="false">Software <small>3rd</small></button>
+            <button class="gear" type="button" data-cat="it" aria-pressed="false">IT &amp; Security <small>4th</small></button>
+          </div>
+        </div>
+        <div class="skill-panel">
+          <div class="skill-chips" id="skill-chips"></div>
+          <div class="used" id="used" aria-live="polite">Click a skill to see where I've used it.</div>
+          <p class="coursework"><b>Coursework:</b> Data Mining &amp; Foundations of Data Science, Data Analytics, Data Visualization, Database Systems, Data Analysis and Regression, Data Structures, Computer Systems, Design and Analysis of Algorithms, Artificial Intelligence, Discrete Math. Certified in IBM Python for Data Science.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <div class="page" id="leadership" data-page>
+    <div class="wrap">
+      <span class="kicker">Captain's armband</span>
+      <h2>Leading <em>off the pitch</em></h2>
+      <p class="sub">Culture and community are a big part of my life. This is where a lot of my time goes.</p>
+      <blockquote class="quote">“It is not enough to do good. It must be done well.”<cite>St. Vincent de Paul</cite></blockquote>
+      <div class="leaders">
+        <div class="lead umma" tabindex="0" aria-expanded="false">
+          <div class="lead-top"><span class="armband">C</span><div><h3>Vice President &amp; Treasurer</h3><div class="when">UMMA DePaul · 2025 – 2026</div></div><span class="hint">Hover to see more</span></div>
+          <div class="stat"><div><b>700+</b><span>Members</span></div><div><b>$35K+</b><span>Annual budget</span></div><div><b>300+</b><span>At each dinner</span></div><div><b>14</b><span>Board</span></div></div>
+          <p>Ran the organization alongside our president. UMMA won Best On-Campus Event at the 2026 Excellence in Leadership Awards.</p>
+          <div class="links"><a href="https://www.instagram.com/depaulumma/" target="_blank" rel="noopener">UMMA on Instagram ↗</a></div>
+          <div class="umma-more"><div class="umma-inner">
+            <p class="umma-about">UMMA (United Muslims Moving Ahead) is a community of 700+ DePaul students. Each year we host quarterly social dinners, including fall, spring, and Ramadan, that bring students together from across campus.</p>
+            <h4>From the stage</h4>
+            <p class="umma-sub">2025–26 DePaul Excellence in Leadership Awards. Click a photo to enlarge it.</p>
+            <div class="stage-grid">
+          <button class="shot wide" type="button" data-full="img/umma-best-event.jpg"><img src="img/umma-best-event.jpg" alt="Accepting Best On-Campus Event on behalf of UMMA" loading="lazy"><span>Accepting Best On-Campus Event for UMMA</span></button>
+          <button class="shot tall" type="button" data-full="img/award-stage.jpg"><img src="img/award-stage.jpg" alt="Hisham on stage as his name is announced" loading="lazy"><span>Name on the big screen</span></button>
+        </div>
+            <p class="award-note">The Outstanding Junior Award recognizes leadership, service, initiative, and commitment to the DePaul community. I also accepted Best On-Campus Event on behalf of UMMA, a team effort from start to finish.</p>
+          </div></div>
+        </div>
+        <div class="lead">
+          <div class="lead-top"><span class="armband">C</span><div><h3>VP of Projects &amp; Founding Member</h3><div class="when">Muslim Tech Collaborative · 2025 – Present</div></div></div>
+          <p>Helped start MTC at DePaul. Lead pro bono tech projects for small businesses and community partners, form project teams, and coordinate with MTC chapters at UIUC and other schools.</p>
+          <div class="links"><a href="https://www.instagram.com/mtcdepaul/" target="_blank" rel="noopener">MTC on Instagram ↗</a></div>
+        </div>
+        <div class="lead">
+          <div class="lead-top"><span class="armband">C</span><div><h3>Host</h3><div class="when">Fresh Eyes Radio Show · 2025 – Present</div></div></div>
+          <p>Weekly show on Radio DePaul built around deep conversations and student perspectives from across campus.</p>
+          <div class="links"><a href="https://open.spotify.com/show/4jD1bVlJlursrT3XhlHq6R" target="_blank" rel="noopener">Listen on Spotify ↗</a><a href="https://www.instagram.com/fresheyesradio/" target="_blank" rel="noopener">Fresh Eyes on Instagram ↗</a></div>
+        </div>
+        <div class="lead">
+          <div class="lead-top"><span class="armband">C</span><div><h3>Faith in Action Scholarship</h3><div class="when">Interfaith Service · 2024 – 2025</div></div></div>
+          <p>Joined an interfaith service project with IMAN and a local synagogue.</p>
+        </div>
+        <div class="lead span2">
+          <div class="lead-top"><span class="armband">C</span><div><h3>Sports President</h3><div class="when">High School Council · Before DePaul</div></div></div>
+          <p>My first leadership role, and a natural fit for the kid who always had a ball at his feet.</p>
+        </div>
+      </div>
+      <div class="cabinet">
+        <h3>Trophy cabinet</h3>
+        <div class="trophies">
+          <div class="trophy"><svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v4M9 20h6M8 6H5a2 2 0 0 0 3 3M16 6h3a2 2 0 0 1-3 3"/></svg><span class="yr">2026</span><p>1st of 31 teams, DemonHacks (WindWalk)</p></div>
+          <div class="trophy"><svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v4M9 20h6M8 6H5a2 2 0 0 0 3 3M16 6h3a2 2 0 0 1-3 3"/></svg><span class="yr">2026</span><p>Outstanding Junior Award, Excellence in Leadership Awards</p></div>
+          <div class="trophy"><svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v4M9 20h6M8 6H5a2 2 0 0 0 3 3M16 6h3a2 2 0 0 1-3 3"/></svg><span class="yr">2026</span><p>Best On-Campus Event (UMMA)</p></div>
+          <div class="trophy"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13l-2 7 5-3 5 3-2-7"/></svg><span class="yr">Every quarter</span><p>Dean's List, all quarters in attendance</p></div>
+          <div class="trophy"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13l-2 7 5-3 5 3-2-7"/></svg><span class="yr">All four years</span><p>Academic Excellence Global DePaul Scholarship</p></div>
+          <div class="trophy"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13l-2 7 5-3 5 3-2-7"/></svg><span class="yr">DePaul</span><p>Faith in Action Scholarship</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="contact" data-page>
+    <div class="wrap contact">
+      <div><span class="kicker">Full time</span><h2>Let's <em>talk</em></h2></div>
+      <p class="sub" style="margin:0">I'm looking for internships in Data Science, Software Engineering, IT and Cybersecurity, and Cloud or Solutions Engineering. The fastest way to reach me is email.</p>
+      <div class="email-row"><span class="email" id="email">hishamr.dev@gmail.com</span><button class="copy" id="copy-email" type="button">Copy email</button></div>
+      <div class="cta">
+        <a class="btn primary" href="https://www.linkedin.com/in/hisham-mohammed-rahmath-b92a78299/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="Hisham-Rahmath-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="https://github.com/Hishammrahmath" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<button class="to-pitch" id="to-pitch" type="button" hidden aria-label="Back to the player menu">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>Back to the pitch</span>
+</button>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" type="button" id="lb-close" aria-label="Close photo">Close ✕</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</div>
+
+<footer><div class="wrap"><span>Hisham Rahmath · Riyadh → Chicago</span><span>Visca Barça · Vamos Argentina</span></div></footer>
+
+<script>
+(function () {
+  /* ---------- One-page navigation ---------- */
+  const SECTIONS = ['home', 'story', 'projects', 'experience', 'skills', 'leadership', 'contact'];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('click', e => {
+    const go = e.target.closest('[data-go]');
+    if (!go) return;
+    e.preventDefault();
+    const target = document.getElementById(go.dataset.go);
+    if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  });
+  const tabs = document.querySelectorAll('.tab');
+  const mark = id => tabs.forEach(t => t.setAttribute('aria-current', t.dataset.go === id ? 'page' : 'false'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) mark(en.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    SECTIONS.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+  }
+  mark('home');
+  const start = location.hash.slice(1);
+  if (SECTIONS.includes(start) && start !== 'home') document.getElementById(start).scrollIntoView();
+
+  /* ---------- Theme toggle ---------- */
+  const root = document.documentElement;
+  try { const saved = localStorage.getItem('hr-theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+  document.getElementById('mode').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('hr-theme', root.dataset.theme); } catch (e) {}
+  });
+
+  /* ---------- Pitch ---------- */
+  const tip = document.getElementById('tip');
+  const ball = document.getElementById('ball');
+  const defaultTip = tip.innerHTML;
+  document.querySelectorAll('.player').forEach(pl => {
+    const enter = () => { tip.innerHTML = pl.dataset.tip; ball.style.left = pl.style.left; ball.style.top = 'calc(' + pl.style.top + ' + 9%)'; };
+    pl.addEventListener('mouseenter', enter);
+    pl.addEventListener('focus', enter);
+    pl.addEventListener('mouseleave', () => { tip.innerHTML = defaultTip; });
+  });
+
+  /* ---------- Projects ---------- */
+  const cards = document.querySelectorAll('.pcard');
+  document.querySelectorAll('.filter').forEach(f => f.addEventListener('click', () => {
+    document.querySelectorAll('.filter').forEach(x => x.setAttribute('aria-pressed', x === f));
+    cards.forEach(c => { c.hidden = !(f.dataset.filter === 'all' || c.dataset.tags.split(' ').includes(f.dataset.filter)); });
+  }));
+  cards.forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.detail').forEach(d => d.hidden = true);
+    const d = document.getElementById('d-' + c.dataset.open);
+    d.hidden = false;
+    d.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  }));
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => { b.closest('.detail').hidden = true; }));
+
+  /* ---------- Story ---------- */
+  const CH = [
+    ['Growing up in Riyadh', ['I grew up in Riyadh as a very athletic kid. Soccer came first, and I was good at it: I played competitive soccer for years.', "I never loved studying, but school always came easily, especially math and logical reasoning. I was also the one everyone handed their broken phone or laptop to."]],
+    ['A global education', ["My schooling has taken me across Saudi Arabia, India, and the United States. Learning in very different classrooms taught me to adapt quickly and connect with people from every background.", 'I was drawn to healthcare for a while, but Computer Science fit how I think, and my older brother encouraged me to pursue it.']],
+    ['DePaul', ['I study Computer Science at DePaul University in Chicago, focused on Software Development and AI, with a minor in Data Science.', 'My first job was in the DePaul Athletics ticket office, which kept me close to the sports I love: soccer, basketball, running, and track.']],
+    ['Trying everything', ['I tried a bit of everything to see what I really liked: social media for the Anthropology department, and leading orientation for new students.', "Orientation showed me what I already suspected. I'm a people person."]],
+    ['Finding my fit', ['Classroom technology at DePaul was where I found my interest, and I have been doing it since.', "Community is a big part of my life. I became Vice President of UMMA and ran it alongside our president, joined Fresh Eyes because I love deep conversations, and was one of the founding members of the Muslim Tech Collaborative at DePaul, which brought me closer to the work I want to do."]],
+    ['Where I am now', ['In 2026 my team won DemonHacks with WindWalk, I started as an IT & Cybersecurity Intern at the Village of Northbrook, and I built MatchIQ.', "I'm the youngest of six, and a lot of what I have I built on my own. Next, I want an internship where I can build things that solve real problems for real people."]]
+  ];
+  const chapter = document.getElementById('chapter');
+  const stops = document.querySelectorAll('.stop');
+  function chapterAt(i) {
+    stops.forEach((s, j) => s.setAttribute('aria-selected', i === j));
+    const [title, paras] = CH[i];
+    chapter.innerHTML = '<h3>' + title + '</h3>' + paras.map(p => '<p>' + p + '</p>').join('') +
+      '<div class="chapter-nav">' +
+      (i > 0 ? '<button class="btn" type="button" data-ch-step="-1">← Back</button>' : '') +
+      (i < CH.length - 1 ? '<button class="btn primary" type="button" data-ch-step="1">Next stop →</button>' : '<button class="btn primary" type="button" data-go="projects">See what I\'ve built →</button>') +
+      '</div>';
+    chapter.dataset.i = i;
+  }
+  stops.forEach((s, i) => s.addEventListener('click', () => chapterAt(i)));
+  chapter.addEventListener('click', e => { const b = e.target.closest('[data-ch-step]'); if (b) chapterAt(+chapter.dataset.i + +b.dataset.chStep); });
+  chapterAt(0);
+
+  /* ---------- Experience ---------- */
+  document.querySelectorAll('.job-btn').forEach(b => b.addEventListener('click', () => {
+    const open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', !open);
+    b.nextElementSibling.hidden = open;
+  }));
+
+  /* ---------- Skills ---------- */
+  const SK = {
+    lang: { name: 'Languages', items: {
+      'Python': 'MatchIQ, WindWalk, and most of my data coursework.',
+      'SQL': 'Database Systems coursework and Renaro\'s PostgreSQL backend.',
+      'R': 'Data Visualization and Data Analytics courses.',
+      'TypeScript': 'MatchIQ\'s Next.js dashboard and Renaro\'s backend.',
+      'JavaScript': 'WindWalk\'s React Native app.',
+      'Java': 'DePaul Computer Science coursework.',
+      'C': 'Computer Systems coursework.',
+      'C++': 'DePaul Computer Science coursework.' } },
+    data: { name: 'Data', items: {
+      'pandas': 'MatchIQ\'s momentum model and data loading.',
+      'NumPy': 'Data Mining coursework and Machine Learning assignments.',
+      'scikit-learn': 'Classification models in Data Mining coursework.',
+      'Plotly': 'MatchIQ\'s interactive momentum charts.',
+      'Matplotlib': 'Python data analysis coursework.',
+      'Jupyter': 'Machine Learning assignments and Kaggle exploration.',
+      'Tableau': 'Data Visualization and Data Analytics courses.',
+      'Excel': 'Comparing datasets with formulas, and tracking BIOS updates at DePaul.' } },
+    soft: { name: 'Software', items: {
+      'FastAPI': 'MatchIQ\'s API and WindWalk\'s backend.',
+      'Next.js': 'MatchIQ\'s dashboard, deployed on Vercel.',
+      'React Native': 'WindWalk\'s mobile app.',
+      'PostgreSQL': 'Renaro\'s multi-tenant backend.',
+      'REST APIs': 'WindWalk\'s weather integration and MatchIQ\'s endpoints.',
+      'pytest': 'MatchIQ\'s test suite.',
+      'Git': 'Every project on my GitHub.',
+      'Mapbox': 'WindWalk\'s interactive maps.' } },
+    it: { name: 'IT & Security', items: {
+      'Microsoft Intune': 'Device deployment and patching at the Village of Northbrook.',
+      'CrowdStrike Falcon': 'Endpoint and security monitoring at Northbrook.',
+      'Rapid7': 'Vulnerability monitoring at Northbrook.',
+      'Mimecast': 'Phishing email review at Northbrook.',
+      'Cisco Meraki': 'Network troubleshooting and access point resets at Northbrook.',
+      'Windows & macOS': 'Supporting faculty across DePaul classrooms.',
+      'Zoom Rooms & A/V': 'DePaul classroom technology support.',
+      'Linux CLI': 'DePaul\'s university server environment.' } }
+  };
+  const ORDER = ['lang', 'data', 'soft', 'it'];
+  const chipsEl = document.getElementById('skill-chips');
+  const used = document.getElementById('used');
+  const needle = document.getElementById('needle');
+  const arc = document.getElementById('arc');
+  function gear(cat) {
+    const i = ORDER.indexOf(cat);
+    document.querySelectorAll('.gear').forEach(g => g.setAttribute('aria-pressed', g.dataset.cat === cat));
+    needle.style.transform = 'rotate(' + (-90 + (i + 1) * 36) + 'deg)';
+    arc.style.strokeDashoffset = 100 - (i + 1) * 20;
+    document.getElementById('gtitle').textContent = SK[cat].name;
+    chipsEl.innerHTML = '';
+    Object.entries(SK[cat].items).forEach(([name, where]) => {
+      const b = document.createElement('button');
+      b.className = 'skill'; b.type = 'button'; b.textContent = name; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => {
+        chipsEl.querySelectorAll('.skill').forEach(x => x.setAttribute('aria-pressed', x === b));
+        used.innerHTML = '<b>' + name + ':</b> ' + where;
+      });
+      chipsEl.appendChild(b);
+    });
+    used.textContent = 'Click a skill to see where I\'ve used it.';
+  }
+  document.querySelectorAll('.gear').forEach(g => g.addEventListener('click', () => gear(g.dataset.cat)));
+  gear('lang');
+
+  /* ---------- MatchIQ chart (real output: France 4–6 England) ---------- */
+  const FRA = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,7,7,0,7,7,7,7,7,0,0,0,0,0,0,0,7,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7];
+  const ENG = [0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,7,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,7,7,0,0,0,7,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,10];
+  const TP = [[48,'F'],[58,'F'],[66,'F'],[90,'F'],[5,'E'],[18,'E'],[37,'E'],[47,'E'],[87,'E']];
+  document.querySelectorAll('svg.momentum').forEach(svg => {
+    const [, , W, H] = svg.getAttribute('viewBox').split(' ').map(Number);
+    const L = 30, R = 12, T = 12, B = 26, MAX = 10, ns = 'http://www.w3.org/2000/svg';
+    const x = m => L + (m / 90) * (W - L - R), y = v => T + (1 - v / MAX) * (H - T - B);
+    const el = (t, a) => { const n = document.createElementNS(ns, t); for (const k in a) n.setAttribute(k, a[k]); svg.appendChild(n); return n; };
+    [0, 5, 10].forEach(v => { el('line', { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: 'var(--line)' }); el('text', { x: L - 8, y: y(v) + 4, 'text-anchor': 'end', fill: 'var(--muted)', 'font-size': 12, 'font-family': 'JetBrains Mono, monospace' }).textContent = v; });
+    [0, 15, 30, 45, 60, 75, 90].forEach(m => { el('text', { x: x(m), y: H - 6, 'text-anchor': 'middle', fill: 'var(--muted)', 'font-size': 12, 'font-family': 'JetBrains Mono, monospace' }).textContent = m + "'"; });
+    const d = a => a.map((v, m) => (m ? 'L' : 'M') + x(m).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    [[FRA, 'var(--blue)'], [ENG, 'var(--garnet)']].forEach(([a, c]) => {
+      el('path', { d: d(a) + ' L ' + x(90) + ' ' + y(0) + ' L ' + x(0) + ' ' + y(0) + ' Z', fill: c, 'fill-opacity': 0.1 });
+      el('path', { d: d(a), fill: 'none', stroke: c, 'stroke-width': 2.4, 'stroke-linejoin': 'round' });
+    });
+    TP.forEach(([m, k]) => el('circle', { cx: x(m), cy: y((k === 'F' ? FRA : ENG)[m]), r: 5.5, fill: 'var(--surface)', stroke: k === 'F' ? 'var(--blue)' : 'var(--garnet)', 'stroke-width': 2 }));
+  });
+
+  /* ---------- Back to the pitch ---------- */
+  const toPitch = document.getElementById('to-pitch');
+  const pitchCard = document.querySelector('.pitch-card');
+  toPitch.addEventListener('click', () => pitchCard.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }));
+  const updateToPitch = () => { toPitch.hidden = pitchCard.getBoundingClientRect().bottom > 0; };
+  addEventListener('scroll', updateToPitch, { passive: true });
+  updateToPitch();
+
+  /* ---------- UMMA expand ---------- */
+  const umma = document.querySelector('.lead.umma');
+  if (matchMedia('(hover: none)').matches) umma.querySelector('.hint').textContent = 'Tap to see more';
+  umma.addEventListener('click', e => {
+    if (e.target.closest('a, .shot')) return;
+    const open = !umma.classList.contains('open');
+    umma.classList.toggle('open', open); umma.setAttribute('aria-expanded', open);
+  });
+  umma.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === umma) { e.preventDefault(); umma.click(); } });
+
+  /* ---------- Lightbox ---------- */
+  const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap');
+  document.addEventListener('click', e => {
+    const shot = e.target.closest('.shot');
+    if (!shot) return;
+    e.stopPropagation();
+    const img = shot.querySelector('img');
+    lbImg.src = shot.dataset.full; lbImg.alt = img.alt; lbCap.textContent = shot.querySelector('span').textContent;
+    lb.hidden = false; document.getElementById('lb-close').focus();
+  });
+  const closeLb = () => { lb.hidden = true; };
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  /* ---------- Contact ---------- */
+  const copyBtn = document.getElementById('copy-email');
+  copyBtn.addEventListener('click', () => {
+    const node = document.getElementById('email');
+    const select = () => { const r = document.createRange(); r.selectNodeContents(node); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected'; };
+    try { navigator.clipboard.writeText(node.textContent).then(() => { copyBtn.textContent = 'Copied'; setTimeout(() => (copyBtn.textContent = 'Copy email'), 1600); }).catch(select); } catch (e) { select(); }
+  });
+})();
+</script>
+
+</body>
+</html>
